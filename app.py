@@ -9,11 +9,18 @@ from __future__ import (unicode_literals, absolute_import,
                         print_function, division)
 
 from bottle import route, run, template
+import CommonMark
+
+
+parser = CommonMark.DocParser()
+renderer = CommonMark.HTMLRenderer()
 
 
 @route('/hello/<name>')
 def index(name):
-    return template('<b>Hello {{name}}</b>!', name=name)
+    ast = parser.parse("Hello *{{name}}*!")
+    html = renderer.render(ast)
+    return template(html, name=name)
 
 
 def main():
