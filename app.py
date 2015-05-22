@@ -8,6 +8,8 @@
 from __future__ import (unicode_literals, absolute_import, print_function,
                         division)
 
+import codecs
+
 import CommonMark
 import yaml
 
@@ -47,11 +49,13 @@ def index(name='Stranger'):
     return template(html, name=name)
 
 
-@route('/hello')
-@route('/hello/<name>')
+@route('/page/<name>')
 @view('default')
-def hello(name='Stranger'):
-    return dict(name=name)
+def hello(name='index'):
+    document = codecs.open("pages/{}.md".format(name), 'r', encoding='utf-8')
+    ast = parser.parse(document.read())
+    html = renderer.render(ast)
+    return dict(content=html, name=name)
 
 
 def main():
