@@ -8,8 +8,10 @@
 from __future__ import (unicode_literals, absolute_import, print_function,
                         division)
 
-from bottle import error, route, run, static_file, template, view
 import CommonMark
+import yaml
+
+from bottle import error, route, run, static_file, template, view
 
 
 parser = CommonMark.DocParser()
