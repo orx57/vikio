@@ -26,6 +26,11 @@ def error404(error):
     return dict(error=error)
 
 
+@route('/css/<filename:path>')
+def send_static(filename):
+    return static_file(filename, root='./static/css')
+
+
 @route('/images/<filename:re:.*\.png>')
 def send_image(filename):
     return static_file(filename, root='./static/img', mimetype='image/png')
