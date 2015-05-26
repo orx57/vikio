@@ -1,0 +1,5 @@
+site:
+    title: Vikio
+    author: Olivier Raggi
+    tagline: Think Out Of The Box
+    description: Yet another simple flat-file Wiki based on Bottle

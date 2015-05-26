@@ -13,11 +13,27 @@ import codecs
 import CommonMark
 import yaml
 
-from bottle import error, route, run, static_file, template, view
+from bottle import error, route, run, static_file, template, view, redirect
 
 
 parser = CommonMark.DocParser()
 renderer = CommonMark.HTMLRenderer()
+
+
+def config(config_path = 'config.yml'):
+    """Get configuration parameters
+    Get data from YAML configuration file
+    Return 
+    """
+
+    # Retrieve configuration data from configuration file
+    try:
+        vikio_config = yaml.load(file(config_path, 'r'))
+    except yaml.YAMLError, exc:
+        print('Error in configuration file: %s', exc)
+
+    #print(yaml.dump(vikio_config))
+    return vikio_config
 
 
 @error(404)
@@ -47,11 +63,8 @@ def download(filename):
 
 
 @route('/')
-@route('/<name>')
 def index(name='Stranger'):
-    ast = parser.parse("Hello **{{name}}**, how are you?")
-    html = renderer.render(ast)
-    return template(html, name=name)
+    redirect("/page/index")
 
 
 @route('/page/<name>')
@@ -65,7 +78,7 @@ def hello(name='index'):
 
 def main():
     """ Run the whole program """
-    run(host='localhost', port=8080, debug=True, reloader=False)
+    run(host='localhost', port=8080, debug=True, reloader=True)
 
 
 if __name__ == '__main__':
