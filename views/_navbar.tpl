@@ -7,13 +7,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Vikio</a>
+          <a class="navbar-brand" href="/page/index">Vikio</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li class="active"><a href="/page/index">Home</a></li>
+            <li><a href="/page/test">Test</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
