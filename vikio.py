@@ -16,8 +16,8 @@ import yaml
 from bottle import error, route, run, static_file, template, view, redirect
 
 
-parser = CommonMark.DocParser()
-renderer = CommonMark.HTMLRenderer()
+parser = CommonMark.Parser()
+renderer = CommonMark.HtmlRenderer()
 
 
 class Struct:
