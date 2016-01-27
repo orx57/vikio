@@ -48,7 +48,7 @@ def error404(error):
 
 
 @route('/css/<filename:path>')
-def send_static(filename):
+def send_css(filename):
     return static_file(filename, root='./static/css')
 
 
@@ -87,7 +87,7 @@ def main():
     """ Run the whole program """
     global site
     site = config()
-    run(host='localhost', port=8080, debug=True, reloader=True)
+    run(host='0.0.0.0', port=8080, debug=True, reloader=True)
 
 
 if __name__ == '__main__':
