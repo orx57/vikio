@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 """
     Document here.
 """
@@ -15,17 +14,16 @@ import yaml
 
 from bottle import error, route, run, static_file, template, view, redirect
 
-
 parser = CommonMark.Parser()
 renderer = CommonMark.HtmlRenderer()
 
 
 class Struct:
-    def __init__(self, **entries): 
+    def __init__(self, **entries):
         self.__dict__.update(entries)
 
 
-def config(config_path = 'config.yml'):
+def config(config_path='config.yml'):
     """Get configuration parameters
     Get data from YAML configuration file
     Return 
@@ -36,7 +34,7 @@ def config(config_path = 'config.yml'):
         vikio_config = yaml.load(file(config_path, 'r'))
     except yaml.YAMLError, exc:
         print('Error in configuration file: %s', exc)
- 
+
     site = Struct(**vikio_config['site'])
     return site
 
