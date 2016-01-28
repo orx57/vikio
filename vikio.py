@@ -12,7 +12,7 @@ import codecs
 import CommonMark
 import yaml
 
-from bottle import error, route, run, static_file, template, view, redirect
+from bottle import abort, error, route, run, static_file, template, view, redirect
 
 parser = CommonMark.Parser()
 renderer = CommonMark.HtmlRenderer()
@@ -75,8 +75,13 @@ def index():
 @route('/page/<name>')
 @view('default')
 def hello(name='index'):
-    document = codecs.open("pages/{}.md".format(name), 'r', encoding='utf-8')
-    ast = parser.parse(document.read())
+    try:
+        with codecs.open("pages/{}.md".format(name),
+                         'r',
+                         encoding='utf-8') as document:
+            ast = parser.parse(document.read())
+    except:
+        abort(404, "Sorry, page not found.")
     html = renderer.render(ast)
     return dict(content=html, name=name, site=site)
 
