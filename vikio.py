@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-    Document here.
+    Vikio
+    Yet another simple Wiki based on Bottle (Python micro web-framework)
+    https://github.com/orx57/vikio
 """
 
 from __future__ import (unicode_literals, absolute_import, print_function,
@@ -12,7 +14,7 @@ import codecs
 import CommonMark
 import yaml
 
-from bottle import abort, error, route, run, static_file, template, view, redirect
+from bottle import abort, error, redirect, route, run, static_file, template, view
 
 parser = CommonMark.Parser()
 renderer = CommonMark.HtmlRenderer()
