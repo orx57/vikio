@@ -1,3 +1,4 @@
 bottle
 CommonMark
+python-frontmatter
 PyYAML

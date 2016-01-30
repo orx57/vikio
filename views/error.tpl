@@ -7,11 +7,7 @@
                 <h2>{{error.status}}</h2>
                 <div class="error-details">
                     Sorry, an error has occured,
-                    % if error.status == '404 Not Found':
-                         Requested page not found!
-                    %else:
-                         Retry!
-                    %end
+                    {{error.body}}
                 </div>
                 <div class="error-actions">
                     <a href="/" class="btn btn-primary btn-lg"><span class="glyphicon glyphicon-home"></span>

@@ -20,4 +20,5 @@ the Python reference implementation.
 
 ## Test
 
-- [Error 404](/qsdf)
+- [Error 404 (1)](/qsdf)
+- [Error 404 (2)](/page/qsdf)

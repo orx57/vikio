@@ -12,6 +12,7 @@ from __future__ import (unicode_literals, absolute_import, print_function,
 import codecs
 
 import CommonMark
+import frontmatter
 import yaml
 
 from bottle import abort, error, redirect, route, run, static_file, template, view
@@ -43,8 +44,8 @@ def config(config_path='config.yml'):
 
 @error(404)
 @view('error')
-def error404(error):
-    return dict(error=error, name='error404', site=site)
+def error(error):
+    return dict(error=error, name=error.status, site=site)
 
 
 @route('/css/<filename:path>')
@@ -76,16 +77,25 @@ def index():
 @route('/page/')
 @route('/page/<name>')
 @view('default')
-def hello(name='index'):
+def page(name='index'):
     try:
         with codecs.open("pages/{}.md".format(name),
                          'r',
                          encoding='utf-8') as document:
-            ast = parser.parse(document.read())
-    except:
-        abort(404, "Sorry, page not found.")
+            firstline = document.read(3)
+            if firstline == '---':
+                document.seek(0)
+                data = frontmatter.load(document)
+                title = data['title']
+                ast = parser.parse(data.content)
+            else:
+                document.seek(0)
+                title = name
+                ast = parser.parse(document.read())
+    except IOError:
+        abort(404, "Requested page not found!")
     html = renderer.render(ast)
-    return dict(content=html, name=name, site=site)
+    return dict(content=html, name=title, site=site)
 
 
 def main():
