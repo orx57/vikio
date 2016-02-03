@@ -21,7 +21,7 @@ parser = CommonMark.Parser()
 renderer = CommonMark.HtmlRenderer()
 
 
-class Struct:
+class Struct(object):
     def __init__(self, **entries):
         self.__dict__.update(entries)
 
@@ -44,7 +44,7 @@ def config(config_path='config.yml'):
 
 @error(404)
 @view('error')
-def error(error):
+def error_page(error):
     return dict(error=error, name=error.status, site=site)
 
 
